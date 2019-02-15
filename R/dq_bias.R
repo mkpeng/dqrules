@@ -27,7 +27,6 @@
 #'  \item{confidence_new }{Confidence of rules in the new datasets}
 #'
 #' @export
-#' @importFrom DescTools BinomCI
 #' @examples
 #'
 #'
