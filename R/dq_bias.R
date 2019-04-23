@@ -1,18 +1,19 @@
-#' Data quality - Bias
+#' Data Quality - Bias
 #'
-#' Bias is calculated using a reference standard. The weighted difference of rules confidence
+#' Bias indicate how the quality of a datasets is different from a reference standard. The weighted difference of rules confidence
 #' between new dataset and reference standard are calculated and ranked for each category of rules.
 #'
 #'
 #' @param rules_results output from \code{dq_check} after applying the rules on the new datasets with the compare group being defined
 #' @param compare_group How data quality is assessed between different group_ids.
+#' @param confidence_ref the reference standard for comparison.
 #'
 #'
 #' @details
 #' A reference standard is selected for bias calculation.
 #' First, confidence intervals of rules in the new datasets are calculated.
-#' then the range of confidence intervals is dervied.
-#' The difference between rule confidence in the new dataset and reference standard is calcualted and weighted by (1- range).
+#' Then, the range of confidence intervals is dervied.
+#' Finally, difference between rule confidences in the new dataset and reference standard is calcualted and weighted by (1- range).
 #' The smaller range, the higher weight. The sum of weighted difference is calculated and ranked based on the compare_group.
 #'
 #' @return
@@ -33,7 +34,7 @@
 #'
 #'
 #'
-dq_bias <- function(rules_results=dq_d4,compare_group="hospital_type",confidence_ref="confidence"){
+dq_bias <- function(rules_results,compare_group,confidence_ref){
 
   if (nchar(compare_group)[1]==0) {
     stop("The Compare group is not defined!,Pls create a dummy compare group variables if not available")

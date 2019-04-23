@@ -4,10 +4,9 @@
 \alias{rules_bootstrap}
 \title{Rules development using the bootstrap}
 \usage{
-rules_bootstrap(data_input = dad_train, item_id = "patient_id",
-  n_bootstrap = 20, test_data = dad_test, confidence_threshold = 0.5,
-  support_threshold = 30, confidence_diff = 0.1,
-  group_var = "age_categories", items = "icd10_who_d4")
+rules_bootstrap(data_input, item_id, n_bootstrap = 20, test_data,
+  confidence_threshold, support_threshold, confidence_diff, group_var,
+  items, clean_method = "sequence")
 }
 \arguments{
 \item{data_input}{Transaction data in long format used for rule development(training data)}
@@ -16,22 +15,26 @@ rules_bootstrap(data_input = dad_train, item_id = "patient_id",
 
 \item{n_bootstrap}{Number of bootstrap using sample with replacement}
 
-\item{confidence_threshold}{Threshold value of confidence for rule development}
+\item{test_data}{Test or validaiton dataset, same format as the \code{data_input}}
+
+\item{confidence_threshold}{Threshold value of confidence for the rule development}
 
 \item{support_threshold}{The minimum number of transactions with items in both left and right sides of a rule}
 
-\item{confidence_diff}{The minimum difference between nested rules}
+\item{confidence_diff}{The minimum difference between the nested rules}
 
-\item{group_var}{1 or more Variables used to group rules}
+\item{group_var}{1 or more variables used to group rules}
 
 \item{items}{the variable to indicate the items in a transaction}
+
+\item{clean_method}{method to clean the nested rules}
 }
 \value{
-The output is in data.frame format. See functions of \code{rules_mining, rules_clean, rules_test} for definition of each column.
+The output is in data.frame format. See functions of \code{rules_mining, rules_clean, rules_test} for the definition of each column.
 }
 \description{
 Development of rules using the boostrap method. This function streamlines the rules development process including
-rules mining, rules clean, rules test.
+the function of \code{rules mining}, \code{rules clean}, and \code{rules test}.
 }
 \examples{
 

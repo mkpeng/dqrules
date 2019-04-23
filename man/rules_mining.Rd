@@ -2,11 +2,10 @@
 % Please edit documentation in R/rules_mining.R
 \name{rules_mining}
 \alias{rules_mining}
-\title{Association Rule mining}
+\title{Association Rule Mining (ARM)}
 \usage{
-rules_mining(data_input = dad2013_mapped, confidence_threshold = 0.5,
-  support_threshold = 30, group_var = "age_categories",
-  item_id = "patient_id", items = "icd10_who_d4")
+rules_mining(data_input, confidence_threshold, support_threshold,
+  group_var, item_id, items)
 }
 \arguments{
 \item{data_input}{Transaction data in long format}
@@ -22,24 +21,25 @@ rules_mining(data_input = dad2013_mapped, confidence_threshold = 0.5,
 \item{items}{The variable indicating the items in a transaction}
 }
 \value{
-a dataframe with a set of rules
+a data.frame with a set of rules
   \item{rules }{The list of rules with the format of X -> Y where  \code{X} is the  eft hand side (LHS) of a rules and \code{y} is the  right hand side (LHS) of a rule}
   \item{support }{Support of a rule}
   \item{Confidence }{Confidence of a rule}
   \item{lift }{lift of a rule}
   \item{count }{Number of items with both RHS and LHS in the corresponding category}
   \item{rule_cateogry }{The group of rules}
-  \item{cases_number} {Total number of transaction in the category of rules}
+  \item{cases_number }{Total number of transaction in the category of rules}
   \item{rule_id }{sequence number for the rules}
 }
 \description{
 Conducts the assocation rule mining {X -> Y} on the long format of transaction type of data.
-In our case, one transaction refers to one hospitalization,
+The function allows ARM based on groups.
+In our case, one transaction refers to one hospitalization.
 }
 \details{
 The function is a wrapper of \code{apriori} function in the \pkg{arules} package.
 The function works on the data.frame data in long format. A transaction can span several rows
-if more than 1 item exists for the transaction.
+if more than 1 items exists for the transaction.
 }
 \examples{
 

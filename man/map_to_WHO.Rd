@@ -4,17 +4,25 @@
 \alias{map_to_WHO}
 \title{Map the ICD-10 coded data into ICD-10 WHO version}
 \usage{
-map_to_WHO(data_input = dad2013, colname_dx = "dx",
-  chapters_excluded = c("R", "S", "T", "U", "V", "W", "X", "Y", "Z",
-  icd10_who = icd10_who))
+map_to_WHO(data_input, colname_dx, chapters_excluded = c("R", "S", "T",
+  "U", "V", "W", "X", "Y", "Z", icd10_who = icd10_who))
 }
 \arguments{
 \item{data_input}{raw data in long format}
 
-\item{colname_dx}{colnames indicate the raw ICD-10 codes}
+\item{colname_dx}{colnames indicate the raw ICD-10 codes.}
 
-\item{chapters_excluded}{Chapters being excluded from analysis: the first digits of ICD-10 codes}
+\item{chapters_excluded}{Chapters being excluded from analysis: the first digits of ICD-10 codes. In the defaults, the codes from chapters on symptoms, causes of disease or health services related factors are excluded.}
+}
+\value{
+a data.frame with a WHO version ICD-10 codes
 }
 \description{
-Map country-specific ICD codes to ICD-1o WHO version
+ICD-10 is the 10th revision of the International Statistical Classification of Diseases and Related Health Problems (ICD), a medical classification list by the World Health Organization (WHO).
+Several country created their own version of ICD-10 codes based on ICD-10-WHO. This function map country-specific ICD codes to ICD-1o WHO version
+Decimals in ICD-10 codes are omitted in the current format.
+}
+\examples{
+
+
 }

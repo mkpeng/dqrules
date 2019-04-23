@@ -1,6 +1,6 @@
 #' Data quality check using association rules
 #'
-#' Apply the association rules to calculate the rules confidence on the new dataset.
+#' Apply the developed rules to calculate the rules confidence on the new dataset.
 #' We developed the rules for data quality assessment purposes. The changes of rules confidences at the different comparison level
 #' can indicate the issues of consistency and completeness of data quality.
 #'
@@ -12,7 +12,7 @@
 #' @param items The variable indicating the items in a transaction
 #'
 #' @return
-#'   A dataframe with confidence calculated in the new dataset
+#'   A data.frame with confidence calculated in the new dataset
 #'   \item{rules }{A list of rules being tested}
 #'   \item{confidence }{Rules confidence from the training data}
 #'   \item{rule_category }{Category of rules, defined during the rule mining process}
@@ -33,9 +33,7 @@
 #'
 #'
 #'
-dq_check <- function(data_input=dad_test, rules_input=rules_1, compare_group="inst",
-                    group_var = "age_categories",item_id = "patient_id",
-                    items = "icd10_who_d4"){
+dq_check <- function(data_input, rules_input, compare_group,group_var,item_id,items){
 
   if (length(compare_group) == 1) {
     data_input$group_id <- unlist(data_input[,compare_group])

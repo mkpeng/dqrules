@@ -2,10 +2,10 @@
 #'
 #' Apply the list of rules on the test or validation data to calculate support and confidence on the new datasets
 #'
-#' @param rules The list of association rules from the \code{rules_clean} function after removing nested rules.
-#' @param test_data The test dataset
+#' @param rules The list of association rules from the \code{rules_clean} or \code{rules_mining} functions
+#' @param test_data Test or validation dataset
 #' @param item_id Unique identifier for each transaction
-#' @param group_var 1 or more Variables used to group rules
+#' @param group_var 1 or more variables used to group rules
 #' @param items The variable indicating the items in a transaction
 #'
 #' @return
@@ -22,8 +22,7 @@
 #'
 #'
 #'
-rules_test <- function(rules=xx_sub,test_data=dad_test,item_id="patient_id",
-                       group_var = "age_categories",items="icd10_who_d4"){
+rules_test <- function(rules,test_data,item_id,group_var,items){
 
   ##########  configure the output file
   if (length(group_var) == 1) {

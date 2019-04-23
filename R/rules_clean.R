@@ -1,15 +1,15 @@
 #' Remove nested rules
 #'
-#' Two rules were considered nested if they have the same RHS and the LHS of one rules is a subset of the other.
-#' The rules's confidences are compared. Only the simple rule is kept
-#' if the confidence difference is less than the selected threshold \code{confidence_diff}.
+#' Two rules were considered nested if they have the same RHS while the LHS of one rule is a subset of the LHS on the other.
+#' Confidences between two rules are compared.
+#' if the confidence difference is less than the selected threshold: \code{confidence_diff}, only the simple rule is kept.
 #'
 #'
-#' @param rules The list of association rules from the \code{rules_mining} function
-#' @param confidence_diff The minimum difference between nested rules
+#' @param rules The list of association rules output from the \code{rules_mining} function
+#' @param confidence_diff The minimum difference of confidence between the two nested rules
 #'
 #' @return
-#'   The output is smilar to output from \code{rules_mining} function with the nested rules being removed
+#'   The output is smilar to output from \code{rules_mining} function with the nested rules being removed. Only the following two columns are added.
 #'   \item{LHS }{Codes in the left hand side of rules, more than 1 code can be presented in the LHS}
 #'   \item{RHS }{Code in the right hand side of rules. Only one code can be there for easy interpretation}
 #'
@@ -18,7 +18,7 @@
 #' @importFrom stringr str_split_fixed
 #' @examples
 #'
-rules_clean <- function(rules=xx,confidence_diff=0.05){
+rules_clean <- function(rules=rules_list,confidence_diff=0.05){
   ####diff_threshold: difference of confidence blow the threshold is deem as ineffective rules
   ###### divide the rules into LHS and RHS
   rules_names <- data.frame(str_split_fixed(rules$rules, " => ", 2))

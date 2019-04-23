@@ -1,17 +1,22 @@
 #' Map the ICD-10 coded data into ICD-10 WHO version
 #'
-#' Map country-specific ICD codes to ICD-1o WHO version
-#'
+#' ICD-10 is the 10th revision of the International Statistical Classification of Diseases and Related Health Problems (ICD), a medical classification list by the World Health Organization (WHO).
+#' Several country created their own version of ICD-10 codes based on ICD-10-WHO. This function map country-specific ICD codes to ICD-1o WHO version
+#' Decimals in ICD-10 codes are omitted in the current format.
 #'
 #' @param data_input raw data in long format
-#' @param colname_dx colnames indicate the raw ICD-10 codes
-#' @param chapters_excluded Chapters being excluded from analysis: the first digits of ICD-10 codes
+#' @param colname_dx colnames indicate the raw ICD-10 codes.
+#' @param chapters_excluded Chapters being excluded from analysis: the first digits of ICD-10 codes. In the defaults, the codes from chapters on symptoms, causes of disease or health services related factors are excluded.
 #'
 #' @return
+#'   a data.frame with a WHO version ICD-10 codes
+#
 #' @export
 #'
 #' @examples
-map_to_WHO <- function(data_input=dad2013,colname_dx="dx",
+#'
+#'
+map_to_WHO <- function(data_input,colname_dx,
                        chapters_excluded= c("R","S","T","U","V","W","X","Y","Z",icd10_who=icd10_who)){
   ## Get the diagnosis code
   diagnosis_code <- unlist(data_input[,colname_dx])
@@ -31,4 +36,3 @@ map_to_WHO <- function(data_input=dad2013,colname_dx="dx",
   data_output$icd10_who_d3 <- icd10_who_d3
   return(data_output)
 }
-

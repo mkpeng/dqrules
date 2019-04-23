@@ -2,19 +2,22 @@
 % Please edit documentation in R/dq_variance.R
 \name{dq_variance}
 \alias{dq_variance}
-\title{Data quality - Variance}
+\title{Data Quality - Variance}
 \usage{
-dq_variance(rules_results = dq_d4, compare_group = "hospital_type")
+dq_variance(rules_results, compare_group)
 }
 \arguments{
-\item{compare_group}{}
+\item{rules_results}{output from \code{dq_check} after applying the rules on the new datasets with the compare group being defined}
+
+\item{compare_group}{How data quality is assessed between different group_ids.}
 }
 \value{
 The output is similar as dq_bias except for that rules are ranked based on variance.
 }
 \description{
+Variance indicates the variability of data quality within a dataset.
 To calculate the variance, we first calculated the 95% confidence intervals of pairwise differences
-between group_id with in the same compare groups. Range of confidence intervals is calculated.
+between group_id with in the same compare group. Afterwards, the range of confidence intervals is calculated.
 Weighted difference between group_ids were calculated and sum. The rules are ranked based on the groups.
 }
 \examples{

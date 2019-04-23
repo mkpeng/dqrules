@@ -1,17 +1,18 @@
-#' Statistical test on the rules
-#' Use of chi-square test to test the statistical assocation between LHS and RHS of rules.
+#' Statistical association test on the rules
+#'
+#' Use of chi-square test to test the statistical association between the LHS and RHS of rules.
 #' This function used the \code{chisq.test} function and simulated p-values are calculated.
-#' The p values are adjusted for multiple comparisons using \code{p.adjust} function.
+#' The p values are adjusted for multiple comparisons using \code{p.adjust} function. The default method is false discovery rate.
 #'
 #' @param rules The list of association rules from the \code{rules_mining, rules_clean, rules_test or rules_bootstrap} functions
-#' @param data_input The training data used for rules development
-#' @param group_var 1 or more Variables used to group rules
+#' @param data_input The training data used for the rules development
+#' @param group_var 1 or more variables used to group rules
 #' @param item_id Unique identifier for each transaction
 #' @param items The variable indicating the items in a transaction
 #' @param method_p_adjustment Methods used to conduct p-value adjustment. See \code{p.adjust} for the list of methods
 #'
 #' @return
-#'  The output is in data.frame format. See functions of \code{rules_mining, rules_clean, rules_test, rules_bootstrap}
+#'  The output is in data.frame format. See functions of \code{rules_mining, rules_clean, rules_test}
 #'  for the definition of each column.
 #'  \item{support_rhs }{Support for the right hand side of rules}
 #'  \item{pvalue_adjusted }{Adjusted P value for chi-square test on the association between the RHS and LHS of rules}
@@ -23,9 +24,7 @@
 #'
 #'
 #'
-rules_statistical_test <- function(rules=rules_train,data_input=dad_train,
-                                   group_var = "age_categories",item_id = "patient_id",
-                                   items = "icd10_who_d4",method_p_adjustment = "fdr"){
+rules_statistical_test <- function(rules,data_input,group_var,item_id,items,method_p_adjustment = "fdr"){
   p_value <- NULL
   if (length(group_var) == 1) {
     data_input$rule_category <- unlist(data_input[,group_var])

@@ -4,18 +4,16 @@
 \alias{rules_test}
 \title{Rule test on the test or validation data}
 \usage{
-rules_test(rules = xx_sub, test_data = dad_test,
-  item_id = "patient_id", group_var = "age_categories",
-  items = "icd10_who_d4")
+rules_test(rules, test_data, item_id, group_var, items)
 }
 \arguments{
-\item{rules}{The list of association rules from the \code{rules_clean} function after removing nested rules.}
+\item{rules}{The list of association rules from the \code{rules_clean} or \code{rules_mining} functions}
 
-\item{test_data}{The test dataset}
+\item{test_data}{Test or validation dataset}
 
 \item{item_id}{Unique identifier for each transaction}
 
-\item{group_var}{1 or more Variables used to group rules}
+\item{group_var}{1 or more variables used to group rules}
 
 \item{items}{The variable indicating the items in a transaction}
 }

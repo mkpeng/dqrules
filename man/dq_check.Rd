@@ -4,9 +4,7 @@
 \alias{dq_check}
 \title{Data quality check using association rules}
 \usage{
-dq_check(data_input = dad_test, rules_input = rules_1,
-  compare_group = "inst", group_var = "age_categories",
-  item_id = "patient_id", items = "icd10_who_d4")
+dq_check(data_input, rules_input, compare_group, group_var, item_id, items)
 }
 \arguments{
 \item{data_input}{Transaction data in long format}
@@ -22,7 +20,7 @@ dq_check(data_input = dad_test, rules_input = rules_1,
 \item{items}{The variable indicating the items in a transaction}
 }
 \value{
-A dataframe with confidence calculated in the new dataset
+A data.frame with confidence calculated in the new dataset
   \item{rules }{A list of rules being tested}
   \item{confidence }{Rules confidence from the training data}
   \item{rule_category }{Category of rules, defined during the rule mining process}
@@ -33,7 +31,7 @@ A dataframe with confidence calculated in the new dataset
   \item{confidence_new }{confidence calculate in the new dataset}
 }
 \description{
-Apply the association rules to calculate the rules confidence on the new dataset.
+Apply the developed rules to calculate the rules confidence on the new dataset.
 We developed the rules for data quality assessment purposes. The changes of rules confidences at the different comparison level
 can indicate the issues of consistency and completeness of data quality.
 }

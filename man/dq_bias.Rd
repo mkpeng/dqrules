@@ -2,15 +2,16 @@
 % Please edit documentation in R/dq_bias.R
 \name{dq_bias}
 \alias{dq_bias}
-\title{Data quality - Bias}
+\title{Data Quality - Bias}
 \usage{
-dq_bias(rules_results = dq_d4, compare_group = "hospital_type",
-  confidence_ref = "confidence")
+dq_bias(rules_results, compare_group, confidence_ref)
 }
 \arguments{
 \item{rules_results}{output from \code{dq_check} after applying the rules on the new datasets with the compare group being defined}
 
 \item{compare_group}{How data quality is assessed between different group_ids.}
+
+\item{confidence_ref}{the reference standard for comparison.}
 }
 \value{
 The rules are ranked based on the bias.
@@ -24,14 +25,14 @@ The rules are ranked based on the bias.
  \item{confidence_new }{Confidence of rules in the new datasets}
 }
 \description{
-Bias is calculated using a reference standard. The weighted difference of rules confidence
+Bias indicate how the quality of a datasets is different from a reference standard. The weighted difference of rules confidence
 between new dataset and reference standard are calculated and ranked for each category of rules.
 }
 \details{
 A reference standard is selected for bias calculation.
 First, confidence intervals of rules in the new datasets are calculated.
-then the range of confidence intervals is dervied.
-The difference between rule confidence in the new dataset and reference standard is calcualted and weighted by (1- range).
+Then, the range of confidence intervals is dervied.
+Finally, difference between rule confidences in the new dataset and reference standard is calcualted and weighted by (1- range).
 The smaller range, the higher weight. The sum of weighted difference is calculated and ranked based on the compare_group.
 }
 \examples{
