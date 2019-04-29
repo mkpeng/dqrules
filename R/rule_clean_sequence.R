@@ -45,7 +45,9 @@ rules_clean_sequence <- function(rules=rules_list,confidence_diff=0.05){
 
         for(lhs_length in 1:(max_lhs_length-1)){
                 rules_1 <- filter(rules_final,LHS_length==lhs_length)
+                dput(paste( 'length=', lhs_length))
                 for(i in 1:dim(rules_1)[1]){
+                        dput(paste( 'i=', i))
                         rhs_code <- rules_1$RHS[i]
                         lhs_code <- rules_1$lhs_list[[i]]
                         confidence_ref <- rules_1$confidence[i]
