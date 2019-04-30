@@ -42,25 +42,37 @@ rules_clean_sequence <- function(rules=rules_list,confidence_diff=0.05){
 
         ### Clean the rules
         max_lhs_length <- max(rules_final$LHS_length)
-
-        for(lhs_length in 1:(max_lhs_length-1)){
-                rules_1 <- filter(rules_final,LHS_length==lhs_length)
-                #dput(paste( 'length=', lhs_length))
-                if (length( rules_1 ) > 0 ) { 
-                  for(i in 1:dim(rules_1)[1]){
-                #          dput(paste( 'i=', i))
-                          rhs_code <- rules_1$RHS[i]
-                          lhs_code <- rules_1$lhs_list[[i]]
-                          confidence_ref <- rules_1$confidence[i]
-                          rules_final$lhs_nested <- unlist(lapply(rules_final$lhs_list,
-                                                                  function(x) all(lhs_code %in% x)))
-                          temp <- rules_final %>%
-                                  filter(lhs_nested,LHS_length > lhs_length,RHS==rhs_code,
-                                        (confidence - confidence_ref) < confidence_diff) %>% pull(rule_id)
-                          rules_final <- rules_final %>% filter( !rule_id %in% temp)
-                  }
+        output <- NULL
+        rules_group <- unique(rules_final$rule_category)
+        for (rule_group in unique(rules_final$rule_category)){
+                # dput(paste('Rules group:',rule_group))
+                rules_temp <- filter(rules_final,rule_category==rule_group)
+                max_lhs_length <- max(rules_temp$LHS_length)
+                if (max_lhs_length==1){
+                        next
                 }
+                for(lhs_length in 1:(max_lhs_length-1)){
+                        rules_1 <- filter(rules_temp,LHS_length==lhs_length)
+                        # dput(paste( 'length=', lhs_length))
+                        for(i in 1:dim(rules_1)[1]){
+                                # dput(paste( 'i=', i))
+                                rhs_code <- rules_1$RHS[i]
+                                lhs_code <- rules_1$lhs_list[[i]]
+                                confidence_ref <- rules_1$confidence[i]
+                                rules_temp$lhs_nested <- unlist(lapply(rules_temp$lhs_list,
+                                                                       function(x) all(lhs_code %in% x)))
+                                temp <- rules_temp %>%
+                                        filter(lhs_nested,LHS_length > lhs_length,RHS==rhs_code,
+                                               (confidence - confidence_ref) < confidence_diff) %>% pull(rule_id)
+                                rules_temp <- rules_temp %>% filter( !rule_id %in% temp)
+                        }
+                        if (lhs_length == max(rules_temp$LHS_length)){
+                                break
+                        }
+                }
+                output = bind_rows(output,rules_temp)
         }
-        rules_final <- rules_final %>% select(-lhs_nested)
-        return(rules_final)
+
+        output <- output %>% select(-lhs_nested)
+        return(output)
 }
