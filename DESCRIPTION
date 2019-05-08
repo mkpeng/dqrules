@@ -1,7 +1,7 @@
 Package: dqrules
 Title: Form association rules for health Data
 Version: 0.0.2
-Authors@R: person(“Mingkai”, “Peng”, email = “mpeng@ucalgary.ca", role = c("aut", "cre"))
+Authors@R: person(“Mingkai”, “Peng”, email = “mpeng@ucalgary.ca”, role = c(“aut”, "cre"))
 Description: Form association rules for health Data
 Depends: R (>= 3.4.0), dplyr
 License: What license is it under?
